@@ -8,8 +8,8 @@ public class Tree {
     private Node root;
     
     
-    public Tree(String father,String mother){
-        root = new Node(father, mother);
+    public Tree(String father){
+        root = new Node(father);
     }
     
     public Node searchMale(String male){
@@ -59,11 +59,11 @@ public class Tree {
             if(T.getFemale()!=null){
                 s+= "/"+T.getFemale();
             }
-            s+=",";
+            s+="{ \n";
             for(int i=1; i<=T.numberofChildren(); i++){
-                s+= separator(level) + showTree(T.getChild(i), level+1);
+                s+= separator(level) + showTree(T.getChild(i), level+1)+"\n";
             }
-            s+= separator(level-1)+ " ";
+            s+= separator(level-1)+ " } ";
         }
         return s;
     }
@@ -89,7 +89,7 @@ public class Tree {
             System.err.println("The male does not exist in the Tree");
             return;
         }
-        //looks for the couple
+        //looks for the couple      
         if(nodeMale.getFemale()==null){
             System.err.println("The male "+names[0]+" is not married");
             return;
@@ -97,7 +97,7 @@ public class Tree {
         if(!nodeMale.getFemale().equals(names[1])){
             System.err.println("the female "+names[1]+" is not married with "+names[0]);
             return;
-        }
+        }       
         //here we add the child
         nodeMale.addChild(new Node(child));
     }

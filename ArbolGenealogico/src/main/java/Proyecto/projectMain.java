@@ -10,12 +10,13 @@ public class projectMain {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Tree AG = new Tree("Adan", "Eva");
-        System.out.println(AG.showTree());
-        AG.addChild("Adan/Eva", "olaf");
-        AG.addChild("Adan/Eva", "elsa");
-        System.out.println(AG.showTree());
-        AG.marry("olaf", "Rut");
+        Tree AG = new Tree("Adan");
+        AG.marry("Adan", "Eva");
+        AG.addChild("Adan/Eva", "Cain");
+        AG.addChild("Adan/Eva", "Abel");
+        AG.marry("Cain", "Rut");
+        AG.marry("Abel", "Rut");
+        AG.addChild("Abel/Rut", "Daniel");
         System.out.println(AG.showTree());
     }
     

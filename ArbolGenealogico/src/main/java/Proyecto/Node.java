@@ -8,20 +8,17 @@ import java.util.List;
  * @author Olaf
  */
 public class Node {
+      
     private String male;
     private String female;
     private List<Node> children;
     
     public Node(String male){
-        this.male = male;       
-        this.children = new ArrayList<Node>();
-    }
-    
-    public Node(String male, String female){
-        this.male = male;
+        this.male = male;    
         this.female = female;
         this.children = new ArrayList<Node>();
     }
+
     public String getMale(){
         return male;
     }
