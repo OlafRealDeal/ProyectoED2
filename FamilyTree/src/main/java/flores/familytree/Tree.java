@@ -1,4 +1,4 @@
-package Proyecto;
+package flores.familytree;
 
 /**
  *

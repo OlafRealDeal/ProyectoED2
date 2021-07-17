@@ -1,7 +1,7 @@
-package Presentation;
+package flores.familytree;
 
-import Proyecto.Node;
-import Proyecto.Tree;
+import flores.familytree.Node;
+import flores.familytree.Tree;
 import javafx.scene.control.TreeView;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
@@ -214,6 +214,7 @@ public class JInterface extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(JInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
