@@ -1,9 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Presentation;
+
+import Proyecto.Tree;
 
 /**
  *
@@ -14,8 +11,10 @@ public class JInterface extends javax.swing.JFrame {
     /**
      * Creates new form JInterface
      */
+     Tree Ag; 
     public JInterface() {
         initComponents();
+        Ag = new Tree("Adan");
     }
 
     /**
@@ -27,24 +26,29 @@ public class JInterface extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btncasar = new javax.swing.JButton();
-        tfhombre = new javax.swing.JTextField();
-        tfmujer = new javax.swing.JTextField();
+        btnmarry = new javax.swing.JButton();
+        tfmale = new javax.swing.JTextField();
+        tffemale = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
-        tfhijo = new javax.swing.JTextField();
+        txtarearesult = new javax.swing.JTextArea();
+        btnaddchild = new javax.swing.JButton();
+        tfchild = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btncasar.setText("CASAR");
-
-        tfmujer.addActionListener(new java.awt.event.ActionListener() {
+        btnmarry.setText("CASAR");
+        btnmarry.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfmujerActionPerformed(evt);
+                btnmarryActionPerformed(evt);
+            }
+        });
+
+        tffemale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tffemaleActionPerformed(evt);
             }
         });
 
@@ -54,11 +58,16 @@ public class JInterface extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Mujer");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtarearesult.setColumns(20);
+        txtarearesult.setRows(5);
+        jScrollPane1.setViewportView(txtarearesult);
 
-        jButton1.setText("ADDHIJO");
+        btnaddchild.setText("ADDHIJO");
+        btnaddchild.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnaddchildActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("solo varon");
@@ -77,19 +86,19 @@ public class JInterface extends javax.swing.JFrame {
                                 .addGap(45, 45, 45)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(btncasar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnmarry, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(29, 29, 29)
                                 .addComponent(jLabel1)))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tfmujer, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
-                            .addComponent(tfhombre))
+                            .addComponent(tffemale, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                            .addComponent(tfmale))
                         .addGap(146, 146, 146)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnaddchild, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
-                            .addComponent(tfhijo, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(tfchild, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(57, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -100,14 +109,14 @@ public class JInterface extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(tfhombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btncasar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfhijo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfmale, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnmarry, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnaddchild, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfchild, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(tfmujer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tffemale, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
@@ -116,9 +125,25 @@ public class JInterface extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tfmujerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfmujerActionPerformed
+    private void tffemaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tffemaleActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfmujerActionPerformed
+    }//GEN-LAST:event_tffemaleActionPerformed
+
+    private void btnmarryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmarryActionPerformed
+
+        String male = tfmale.getText();
+        String female = tffemale.getText();
+        Ag.marry(male, female);
+        txtarearesult.setText(Ag.showTree());
+        tfmale.setText(" "); tffemale.setText(" ");
+        
+        
+    }//GEN-LAST:event_btnmarryActionPerformed
+
+    private void btnaddchildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddchildActionPerformed
+        String child = tfchild.getText(); 
+        Ag.addChild(male/female, child);
+    }//GEN-LAST:event_btnaddchildActionPerformed
 
     /**
      * @param args the command line arguments
@@ -156,15 +181,15 @@ public class JInterface extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btncasar;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnaddchild;
+    private javax.swing.JButton btnmarry;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField tfhijo;
-    private javax.swing.JTextField tfhombre;
-    private javax.swing.JTextField tfmujer;
+    private javax.swing.JTextField tfchild;
+    private javax.swing.JTextField tffemale;
+    private javax.swing.JTextField tfmale;
+    private javax.swing.JTextArea txtarearesult;
     // End of variables declaration//GEN-END:variables
 }
