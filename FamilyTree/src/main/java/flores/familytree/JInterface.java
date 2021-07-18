@@ -1,8 +1,17 @@
 package flores.familytree;
 
+import com.google.gson.Gson;
 import flores.familytree.Node;
 import flores.familytree.Tree;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.control.TreeView;
+import javax.swing.JFileChooser;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
@@ -13,13 +22,18 @@ import javax.swing.tree.TreeModel;
  */
 public class JInterface extends javax.swing.JFrame {
 
+    Tree ft;
+
     /**
      * Creates new form JInterface
      */
-     Tree Ft; 
+
     public JInterface() {
         initComponents();
-        Ft = new Tree(tfmale.getText());
+        ft = new Tree(tfmale.getText());
+        ft.marry(tfmale.getText(), tffemale.getText());
+        fillTreeView();
+//        jtview.setModel(null);
     }
 
     /**
@@ -36,13 +50,14 @@ public class JInterface extends javax.swing.JFrame {
         tffemale = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtarearesult = new javax.swing.JTextArea();
         btnaddchild = new javax.swing.JButton();
         tfchild = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtview = new javax.swing.JTree();
+        btnsave = new javax.swing.JButton();
+        btnopen = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,6 +70,7 @@ public class JInterface extends javax.swing.JFrame {
 
         tfmale.setText("Adan");
 
+        tffemale.setText("Eva");
         tffemale.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tffemaleActionPerformed(evt);
@@ -67,10 +83,6 @@ public class JInterface extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Mujer");
 
-        txtarearesult.setColumns(20);
-        txtarearesult.setRows(5);
-        jScrollPane1.setViewportView(txtarearesult);
-
         btnaddchild.setText("ADDHIJO");
         btnaddchild.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,19 +90,38 @@ public class JInterface extends javax.swing.JFrame {
             }
         });
 
+        tfchild.setText("Cain");
+
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("solo varon");
 
         jScrollPane2.setViewportView(jtview);
+
+        btnsave.setText("Guardar");
+        btnsave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnsaveActionPerformed(evt);
+            }
+        });
+
+        btnopen.setText("Abrir");
+        btnopen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnopenActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setText("Archivo");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(45, 45, 45)
@@ -108,38 +139,42 @@ public class JInterface extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
-                            .addComponent(tfchild, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 627, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(329, Short.MAX_VALUE))
+                            .addComponent(tfchild, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(231, 231, 231)
+                                .addComponent(jLabel4))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(162, 162, 162)
+                                .addComponent(btnsave)
+                                .addGap(27, 27, 27)
+                                .addComponent(btnopen, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 996, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(284, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(tfmale, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnmarry, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnaddchild, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfchild, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(8, 8, 8)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(tffemale, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(46, 46, 46))
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(tfmale, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnmarry, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnaddchild, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfchild, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnsave)
+                    .addComponent(btnopen))
+                .addGap(8, 8, 8)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(tffemale, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -150,29 +185,38 @@ public class JInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_tffemaleActionPerformed
 
     private void btnmarryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmarryActionPerformed
-
-        String male = tfmale.getText();
-        String female = tffemale.getText();
-        Ft.marry(male, female);
-        txtarearesult.setText(Ft.showTree());
+        if (ft == null) {
+            String male = tfmale.getText();
+            String female = tffemale.getText();
+            if (!male.equals("") && !female.equals("")) {
+                ft = new Tree(male);
+                ft.marry(male, female);
+            }
+        } else {
+            String male = tfmale.getText();
+            String female = tffemale.getText();
+            if (!male.equals("") && !female.equals("")) {
+                ft.marry(male, female);
+            }
+        }
         fillTreeView();
-        
-        
+
     }//GEN-LAST:event_btnmarryActionPerformed
-    private void fillTreeView(){
-        Node root = Ft.getRoot();
+    private void fillTreeView() {
+        Node root = ft.getRoot();
         DefaultMutableTreeNode root1 = new DefaultMutableTreeNode(root.visualize());
         graphicTree(root, root1);
         DefaultTreeModel model = new DefaultTreeModel(root1);
         jtview.setModel(model);
     }
-    private void graphicTree(Node T, DefaultMutableTreeNode TNode){
-        if(T == null){
+
+    private void graphicTree(Node T, DefaultMutableTreeNode TNode) {
+        if (T == null) {
             return;
-        }else{
-            for(int i =1; i<=T.numberofChildren(); i++){
+        } else {
+            for (int i = 1; i <= T.numberofChildren(); i++) {
                 Node h = T.getChild(i);
-                if(h==null){
+                if (h == null) {
                     return;
                 }
                 DefaultMutableTreeNode child = new DefaultMutableTreeNode(h.visualize());
@@ -181,13 +225,67 @@ public class JInterface extends javax.swing.JFrame {
             }
         }
     }
-    
+
     private void btnaddchildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddchildActionPerformed
-        String child = tfchild.getText(); 
+        if(ft == null){
+            return;
+        }else{
+        String child = tfchild.getText();
         String couple = tfmale.getText() + "/" + tffemale.getText();
-        Ft.addChild(couple, child);
-       
+        ft.addChild(couple, child);
+        fillTreeView();
+        
+        }
     }//GEN-LAST:event_btnaddchildActionPerformed
+
+    private void btnsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsaveActionPerformed
+        JFileChooser chooser = new JFileChooser();
+        int option = chooser.showSaveDialog(this);
+
+        // 0 option stands for accept in the window
+        if (option == JFileChooser.APPROVE_OPTION) {
+            File saveFile = chooser.getSelectedFile();
+            String path = saveFile.getAbsolutePath();
+
+            Gson gson = new Gson();
+            String expandTree = gson.toJson(ft);
+            try {
+                FileWriter writer = new FileWriter(path);
+                writer.write(expandTree);
+
+                writer.flush();
+                writer.close();
+
+            } catch (IOException ex) {
+                Logger.getLogger(JInterface.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }//GEN-LAST:event_btnsaveActionPerformed
+
+    private void btnopenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnopenActionPerformed
+        // TODO add your handling code here:
+        JFileChooser chooser = new JFileChooser();
+        int option = chooser.showSaveDialog(this);
+        
+        if(option == JFileChooser.APPROVE_OPTION){
+           File readFile = chooser.getSelectedFile(); 
+           String text = "";
+            try {
+                Scanner reader = new Scanner(readFile);
+                while(reader.hasNextLine()){
+                    text+= reader.nextLine();
+                }
+                Gson gson = new Gson();
+                ft = gson.fromJson(text, Tree.class);
+                fillTreeView();
+                
+                
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(JInterface.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_btnopenActionPerformed
 
     /**
      * @param args the command line arguments
@@ -228,15 +326,16 @@ public class JInterface extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnaddchild;
     private javax.swing.JButton btnmarry;
+    private javax.swing.JButton btnopen;
+    private javax.swing.JButton btnsave;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTree jtview;
     private javax.swing.JTextField tfchild;
     private javax.swing.JTextField tffemale;
     private javax.swing.JTextField tfmale;
-    private javax.swing.JTextArea txtarearesult;
     // End of variables declaration//GEN-END:variables
 }

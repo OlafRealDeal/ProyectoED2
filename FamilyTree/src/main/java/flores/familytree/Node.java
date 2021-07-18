@@ -12,9 +12,9 @@ public class Node {
     private String male;
     private String female;
     private List<Node> children;
-    
+ 
     public Node(String male){
-        this.male = male;    
+        this.male = male;  
         this.female = female;
         this.children = new ArrayList<Node>();
     }
