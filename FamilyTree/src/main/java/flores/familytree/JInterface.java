@@ -16,6 +16,9 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
 
+//ESTUDIANTE : FLORES MONTENEGRO ALVARO MAURICIO
+//REGISTRO   : 215015827
+
 /**
  *
  * @author Olaf
@@ -28,7 +31,7 @@ public class JInterface extends javax.swing.JFrame {
      * Creates new form JInterface
      */
 
-    public JInterface() {
+    public JInterface() { // we inicialize the Family Tree getting a written(in the form) couple married.
         initComponents();
         ft = new Tree(tfmale.getText());
         ft.marry(tfmale.getText(), tffemale.getText());
@@ -210,14 +213,14 @@ public class JInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_tffemaleActionPerformed
 
     private void btnmarryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmarryActionPerformed
-        if (ft == null) {
+        if (ft == null) { // it marries a couple if the tree is empty.
             String male = tfmale.getText();
             String female = tffemale.getText();
             if (!male.equals("") && !female.equals("")) {
                 ft = new Tree(male);
                 ft.marry(male, female);
             }
-        } else {
+        } else { //if the Tree isnt empty , it gets the string male and female and marry them.
             String male = tfmale.getText();
             String female = tffemale.getText();
             if (!male.equals("") && !female.equals("")) {
@@ -227,15 +230,15 @@ public class JInterface extends javax.swing.JFrame {
         fillTreeView();
 
     }//GEN-LAST:event_btnmarryActionPerformed
-    private void fillTreeView() {
-        Node root = ft.getRoot();
-        DefaultMutableTreeNode root1 = new DefaultMutableTreeNode(root.visualize());
+    private void fillTreeView() { 
+        Node root = ft.getRoot(); //we get the Tree from the Tree.class and copy it to the TreeView Root we just created.
+        DefaultMutableTreeNode root1 = new DefaultMutableTreeNode(root.visualize()); 
         graphicTree(root, root1);
         DefaultTreeModel model = new DefaultTreeModel(root1);
         jtview.setModel(model);
     }
 
-    private void graphicTree(Node T, DefaultMutableTreeNode TNode) {
+    private void graphicTree(Node T, DefaultMutableTreeNode TNode) { //IT ALLOWS US TO TRANSFORM OUR TREE IN JTREEVIEW 
         if (T == null) {
             return;
         } else {
@@ -252,9 +255,10 @@ public class JInterface extends javax.swing.JFrame {
     }
 
     private void btnaddchildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddchildActionPerformed
+       // this method get the couple for we wanna add a child.
         if(ft == null){
             return;
-        }else{
+        }else{ 
         String child = tfchild.getText();
         String couple = tfmale.getText() + "/" + tffemale.getText();
         ft.addChild(couple, child);
@@ -264,7 +268,9 @@ public class JInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_btnaddchildActionPerformed
 
     private void btnsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsaveActionPerformed
-        JFileChooser chooser = new JFileChooser();
+       //Using dependencies Gson and Methods from Jfile we create a variable savefile and save the actual tree.
+        
+        JFileChooser chooser = new JFileChooser(); 
         int option = chooser.showSaveDialog(this);
 
         // 0 option stands for accept in the window
@@ -272,14 +278,14 @@ public class JInterface extends javax.swing.JFrame {
             File saveFile = chooser.getSelectedFile();
             String path = saveFile.getAbsolutePath();
 
-            Gson gson = new Gson();
-            String expandTree = gson.toJson(ft);
+            Gson gson = new Gson(); //we create a variable Gson 
+            String expandTree = gson.toJson(ft);  //we save the tree into Json
             try {
-                FileWriter writer = new FileWriter(path);
-                writer.write(expandTree);
+                FileWriter writer = new FileWriter(path); 
+                writer.write(expandTree); 
 
-                writer.flush();
-                writer.close();
+                writer.flush(); //we clean
+                writer.close(); //we close
 
             } catch (IOException ex) {
                 Logger.getLogger(JInterface.class.getName()).log(Level.SEVERE, null, ex);

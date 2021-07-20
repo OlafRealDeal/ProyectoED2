@@ -1,5 +1,8 @@
 package flores.familytree;
 
+//ESTUDIANTE : FLORES MONTENEGRO ALVARO MAURICIO
+//REGISTRO   : 215015827
+
 /**
  *
  * @author Olaf
@@ -101,7 +104,7 @@ public class Tree {
         //here we add the child
         nodeMale.addChild(new Node(child));
     }
-    public Node getRoot(){
+    public Node getRoot(){ //we pass this method to the Jform 
         return root;
     }
 }
